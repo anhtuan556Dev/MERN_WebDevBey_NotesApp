@@ -1,6 +1,8 @@
 import express from "express";
 import dotenv from "dotenv";
 import connectDB from "./config/db.js";
+import authRouter from "./routes/auth.js";
+import { protect } from "./middleware/auth.js";
 
 // Cấu hình dotenv để đọc các biến môi trường từ file .env
 dotenv.config();
@@ -13,6 +15,12 @@ const app = express();
 
 // Kết nối đến cơ sở dữ liệu MongoDB
 connectDB();
+
+// Middleware để xử lý JSON
+app.use(express.json());
+
+// Định nghĩa route cho auth
+app.use("/api/users", authRouter);
 
 // Định nghĩa route GET cho trang chủ
 app.get("/", (req, res) => {
