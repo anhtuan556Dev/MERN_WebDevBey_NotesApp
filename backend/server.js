@@ -2,7 +2,7 @@ import express from "express";
 import dotenv from "dotenv";
 import connectDB from "./config/db.js";
 import authRouter from "./routes/auth.js";
-import { protect } from "./middleware/auth.js";
+import notesRouter from "./routes/notes.js";
 
 // Cấu hình dotenv để đọc các biến môi trường từ file .env
 dotenv.config();
@@ -21,6 +21,9 @@ app.use(express.json());
 
 // Định nghĩa route cho auth
 app.use("/api/users", authRouter);
+
+// Định nghĩa route cho notes
+app.use("/api/notes", notesRouter);
 
 // Định nghĩa route GET cho trang chủ
 app.get("/", (req, res) => {
